@@ -41,7 +41,7 @@
         </filter>
     </appender>
 
-    <Root>
+    <Root level="trace">
         <appender-ref ref="Console"/>
         <appender-ref ref="FileAppender"/>
     </Root>
