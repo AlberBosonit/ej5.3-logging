@@ -1,0 +1,49 @@
+<configuration>
+
+    <property name="DIRECTORY" value="errorFiles"/>
+    <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                ${LOG_PATTERN}
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>TRACE</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+        </filter>
+    </appender>
+
+    <appender name="FileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>${DIRECTORY}/spring-logging.log</file>
+        <encoder>
+            <Pattern>${LOG_PATTERN}</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <Root>
+        <appender-ref ref="Console"/>
+        <appender-ref ref="FileAppender"/>
+    </Root>
+
+</configuration>
